@@ -1,0 +1,20 @@
+TASKA2.3
+int *lowest_stock(int stock[], int n)
+{
+    int i, min_index = 0;
+ 
+    if (stock == NULL || n <= 0)
+        return NULL;
+ 
+    for (i = 1; i < n; i++) {
+        if (stock[i] < stock[min_index])
+            min_index = i;
+    }
+    return &stock[min_index];
+}
+ 
+/* Example:
+int *lowest = lowest_stock(stock, 8);
+if (lowest != NULL)
+    *lowest = *lowest + 5;
+*/

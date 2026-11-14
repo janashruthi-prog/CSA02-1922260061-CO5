@@ -1,0 +1,10 @@
+TASKB1.4
+long long power_iterative(long long base, int exp)
+{
+    long long result = 1;
+    while (exp > 0) {
+        result *= base;
+        exp--;
+    }
+    return result;
+}

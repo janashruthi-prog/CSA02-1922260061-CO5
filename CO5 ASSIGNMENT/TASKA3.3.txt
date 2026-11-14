@@ -1,0 +1,18 @@
+TASKA3.3
+/* Example command forms:
+   bloodbank find O+
+   bloodbank issue A- 2
+*/
+int main(int argc, char *argv[])
+{
+    if (argc == 3 && strcmp(argv[1], "find") == 0) {
+        /* validate argv[2] as a supported blood group, then search */
+    } else if (argc == 4 && strcmp(argv[1], "issue") == 0) {
+        /* validate group and positive integer quantity, then issue */
+    } else {
+        fprintf(stderr,
+                "Usage: bloodbank find GROUP | bloodbank issue GROUP UNITS\n");
+        return 1;
+    }
+    return 0;
+}

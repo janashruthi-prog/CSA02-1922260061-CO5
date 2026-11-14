@@ -1,0 +1,14 @@
+TASKA5.1
+typedef struct {
+    int group_code;
+    int units;
+} Stock;
+ 
+/* Text donor record example:
+   fprintf(fp, "%d,%s,%s,%d,%s,%s\n",
+           d.id, d.name, d.group, d.age, d.phone, d.last_donation);
+*/
+ 
+/* Binary stock records:
+   fwrite(stock_array, sizeof(Stock), count, fp);
+*/

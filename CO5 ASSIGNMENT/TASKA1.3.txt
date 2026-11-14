@@ -1,0 +1,7 @@
+TASKA1.3
+typedef struct {
+    int eligible_count;
+    int youngest_id;
+} DonorSummary;
+ 
+DonorSummary donor_summary(const DonorList *list, const char *group);

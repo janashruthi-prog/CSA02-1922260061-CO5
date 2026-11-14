@@ -1,0 +1,17 @@
+TASKB2.1
+#include <stdio.h>
+#include <string.h>
+ 
+int read_name(char name[], size_t size)
+{
+    if (fgets(name, (int)size, stdin) == NULL)
+        return 0;
+ 
+    name[strcspn(name, "\n")] = '\0';
+    if (strlen(name) == size - 1) {
+        int ch;
+        while ((ch = getchar()) != '\n' && ch != EOF) { }
+        return -1; /* input may have been truncated */
+    }
+    return 1;
+}

@@ -1,0 +1,27 @@
+TASKB3.4
+typedef struct {
+    int group_code;
+    int units;
+} Stock;
+ 
+int update_units(FILE *fp, int index, int units)
+{
+    Stock s;
+ 
+    if (fp == NULL || index < 0 || units < 0)
+        return 0;
+ 
+    if (fseek(fp, (long)index * (long)sizeof(Stock), SEEK_SET) != 0)
+        return 0;
+    if (fread(&s, sizeof(Stock), 1, fp) != 1)
+        return 0;
+ 
+    s.units = units;
+ 
+    if (fseek(fp, -(long)sizeof(Stock), SEEK_CUR) != 0)
+        return 0;
+    if (fwrite(&s, sizeof(Stock), 1, fp) != 1)
+        return 0;
+ 
+    return 1;
+}

@@ -1,0 +1,51 @@
+TASKB3.1
+#include <stdio.h>
+#include <string.h>
+ 
+typedef struct {
+    int id;
+    char name[40];
+    char group[4];
+    int age;
+} Donor;
+ 
+int main(void)
+{
+    Donor original[10], readback[10];
+    FILE *fp;
+    int i;
+ 
+    for (i = 0; i < 10; i++) {
+        original[i].id = 7001 + i;
+        snprintf(original[i].name, sizeof original[i].name,
+                 "Donor%d", i + 1);
+        strcpy(original[i].group, (i % 2) ? "A+" : "O+");
+        original[i].age = 20 + i;
+    }
+ 
+    fp = fopen("donors.bin", "wb");
+    if (fp == NULL) { perror("donors.bin"); return 1; }
+    if (fwrite(original, sizeof(Donor), 10, fp) != 10) {
+        perror("fwrite"); fclose(fp); return 1;
+    }
+    fclose(fp);
+ 
+    fp = fopen("donors.bin", "rb");
+    if (fp == NULL) { perror("donors.bin"); return 1; }
+    if (fread(readback, sizeof(Donor), 10, fp) != 10) {
+        perror("fread"); fclose(fp); return 1;
+    }
+    fclose(fp);
+ 
+    for (i = 0; i < 10; i++) {
+        if (original[i].id != readback[i].id ||
+            strcmp(original[i].name, readback[i].name) != 0 ||
+            strcmp(original[i].group, readback[i].group) != 0 ||
+            original[i].age != readback[i].age) {
+            printf("Mismatch at record %d\n", i);
+            return 1;
+        }
+    }
+    printf("All 10 donor records verified successfully.\n");
+    return 0;
+}
